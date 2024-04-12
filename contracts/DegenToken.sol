@@ -19,6 +19,15 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
             _mint(to, amount);
         }
 
+        function burn(uint256 amount) public override{ 
+            _burn(msg.sender, amount);
+        }
+
+        function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+            _transfer(_msgSender(), recipient, amount);
+            return true;
+        }
+
         function redeem(uint256 item_serial) public payable{
         
         if(item_serial < 0 && item_serial > 4){
